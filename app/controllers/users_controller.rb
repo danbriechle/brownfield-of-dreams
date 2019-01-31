@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
     if current_user.token
-      @repos = Repo.generate(conn_repos(current_user.token)).take(5)
+      @repos = Repo.generate(conn(current_user.token, "repos")).take(5)
+      @followers = Follower.generate(conn(current_user.token, "followers")).take(5)
     end
   end
 
@@ -20,12 +21,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def conn_repos(token)
+  def conn(token, path)
     conn = Faraday.new(url: "https://api.github.com") do |f|
       f.headers["Authorization"] = "Token #{token}"
       f.adapter Faraday.default_adapter
     end
-    conn.get "/user/repos"
+    conn.get "/user/#{path}"
   end
 
   private

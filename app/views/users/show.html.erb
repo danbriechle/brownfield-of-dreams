@@ -22,6 +22,14 @@
         </div>
         <% end %>
       </div>
+      <li> Followers </li>
+      <div class="followers">
+        <% @followers.each do |follower| %>
+        <div id=<%= follower.name %>>
+          <a href=<%= follower.url %>><%= follower.name %></a>
+        </div>
+        <% end %>
+      </div>
     <% end %>
   </section>
 </section>

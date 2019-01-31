@@ -75,9 +75,9 @@ describe 'A registered user' do
         expect(page).to have_content("GitHub Section")
         expect(page).to have_content("Followers")
 
-        within "Followers" do
-          expect(page).to have_content("mgoodhart")
-          expect(page).to have_link("mgoodhart")
+        within ".followers" do
+          expect(page).to have_content("mgoodhart5")
+          expect(page).to have_link("mgoodhart5")
         end
       end
     end
