@@ -30,6 +30,14 @@
         </div>
         <% end %>
       </div>
+      <li> Following </li>
+      <div class="following">
+        <% @following.each do |follow| %>
+        <div id=<%= follow.name %>>
+          <a href=<%= follow.url %>><%= follow.name %></a>
+        </div>
+        <% end %>
+      </div>
     <% end %>
   </section>
 </section>

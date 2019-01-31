@@ -3,6 +3,8 @@ class UsersController < ApplicationController
     if current_user.token
       @repos = Repo.generate(conn(current_user.token, "repos")).take(5)
       @followers = Follower.generate(conn(current_user.token, "followers")).take(5)
+      @following = Follower.generate(conn(current_user.token, "following")).take(5)
+
     end
   end
 
