@@ -59,5 +59,27 @@ describe 'A registered user' do
         expect(page).to_not have_content("Repos")
       end
     end
+
+    it 'sees a section with their github followers' do
+        VCR.use_cassette("dans_followers_feature") do
+          dan = create(:user, token: ENV["DAN_GIT_API_KEY"])
+          conn = Faraday.new(url: "https://api.github.com") do |f|
+            f.headers["Authorization"] = "Token #{dan.token}"
+            f.adapter Faraday.default_adapter
+          end
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(dan)
+
+        visit dashboard_path
+
+        expect(page).to have_content("GitHub Section")
+        expect(page).to have_content("Followers")
+
+        within "Followers" do
+          expect(page).to have_content("mgoodhart")
+          expect(page).to have_link("mgoodhart")
+        end
+      end
+    end
   end
 end
