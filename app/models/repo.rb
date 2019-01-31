@@ -3,6 +3,7 @@ class Repo
   def initialize(gh_response)
     @url = gh_response["html_url"]
     @name = gh_response["name"]
+    @gh_response = gh_response
   end
 
   def self.generate(gh_response)

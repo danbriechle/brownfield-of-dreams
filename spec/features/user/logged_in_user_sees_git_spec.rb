@@ -57,7 +57,24 @@ describe 'A registered user' do
 
         expect(page).to_not have_content("GitHub Section")
         expect(page).to_not have_content("Repos")
+        expect(page).to_not have_content("Followers")
       end
     end
+
+    it 'sees a section for followers' do 
+      VCR.use_cassette("nico_cassette") do 
+        user = create(:user, token: ENV["NICO_GIT_API_KEY"])
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+        conn = Faraday.new(url: "https://api.github.com") do |f|
+          f.headers["Authorization"] = "token #{user.token}"
+          f.adapter Faraday.default_adapter
+        end
+
+        visit dashboard_path
+
+        expect(page).to have_content("Followers")
+      end
+    end 
   end
 end

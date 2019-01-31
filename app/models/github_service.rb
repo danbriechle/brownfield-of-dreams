@@ -11,7 +11,10 @@ class GithubService
     end
 
     def self.repos(user)
-        response = connection(user.token).get "/user/repos"
+        connection(user.token).get "/user/repos"
     end
-        
+
+    def self.user_relation(user, relation)
+        connection(user.token).get "/user/#{relation}"
+    end 
 end 

@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Repo" do
-
-
-
   it 'exists' do
     response = {"html_url" => "place"}
     repo = Repo.new(response)
@@ -49,12 +46,10 @@ RSpec.describe "Repo" do
 
       actual = JSON.parse(response.body).first["html_url"]
 
-
       repos = Repo.generate(response)
       expected = repos.first.url
 
       expect(expected).to eq(actual)
     end
   end
-
 end
