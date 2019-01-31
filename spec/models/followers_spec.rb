@@ -4,18 +4,18 @@ RSpec.describe "Follower" do
 
   it 'exists' do
     response = {"login" => "Dave", "html_url" => "Place"}
-    repo = Follower.new(response)
+    follower = Follower.new(response)
 
-    expect(repo).to be_truthy
-    expect(repo.class).to eq(Follower)
+    expect(follower).to be_truthy
+    expect(follower.class).to eq(Follower)
   end
 
   it 'has attributes' do
     response = {"login" => "Dave", "html_url" => "Place"}
-    repo = Follower.new(response)
+    follower = Follower.new(response)
 
-    expect(repo.name).to eq("Dave")
-    expect(repo.url).to eq("Place")
+    expect(follower.name).to eq("Dave")
+    expect(follower.url).to eq("Place")
   end
 
   it 'can take users git hub api token' do
