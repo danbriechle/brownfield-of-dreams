@@ -118,7 +118,10 @@ GEM
     ffi (1.10.0)
     figaro (1.1.1)
       thor (~> 0.14)
-    foundation-rails (6.5.1.0)
+    foundation-rails (6.5.3.0)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0)
+      sprockets-es6 (>= 0.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     google-api-client (0.28.1)
@@ -194,6 +197,7 @@ GEM
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
+    optimist (3.0.0)
     os (1.0.0)
     pg (1.1.4)
     pry (0.12.2)
@@ -352,6 +356,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   omniauth-census!
   omniauth-google-oauth2
+  optimist
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)
@@ -374,4 +379,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.17.1
+   2.0.1
