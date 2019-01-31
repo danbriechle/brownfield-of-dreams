@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'A registered user' do
   context 'when I visit /dashboard' do
     it 'sees a section for github' do
-      VCR.use_cassette("dan_cassette") do
+      VCR.use_cassette("dan_cassette1") do
         user = create(:user, token: ENV["DAN_GIT_API_KEY"])
         conn = Faraday.new(url: "https://api.github.com") do |f|
           f.headers["Authorization"] = "Token #{user.token}"
@@ -25,7 +25,7 @@ describe 'A registered user' do
     end
 
     it 'only sees its git hub info ' do
-      VCR.use_cassette("nico_cassette") do
+      VCR.use_cassette("nico_cassette1") do
         nico = create(:user, token: ENV["NICO_GIT_API_KEY"])
         dan = create(:user, token: ENV["DAN_GIT_API_KEY"])
         conn = Faraday.new(url: "https://api.github.com") do |f|
@@ -48,7 +48,7 @@ describe 'A registered user' do
     end
 
     it 'does not see a section for github if it does not have a token' do
-      VCR.use_cassette("no_token_cassette") do
+      VCR.use_cassette("no_token_cassette1") do
         user = create(:user)
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -60,21 +60,5 @@ describe 'A registered user' do
         expect(page).to_not have_content("Followers")
       end
     end
-
-    it 'sees a section for followers' do 
-      VCR.use_cassette("nico_cassette") do 
-        user = create(:user, token: ENV["NICO_GIT_API_KEY"])
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-
-        conn = Faraday.new(url: "https://api.github.com") do |f|
-          f.headers["Authorization"] = "token #{user.token}"
-          f.adapter Faraday.default_adapter
-        end
-
-        visit dashboard_path
-
-        expect(page).to have_content("Followers")
-      end
-    end 
   end
 end
