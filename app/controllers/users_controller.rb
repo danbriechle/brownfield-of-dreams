@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
   def show
     if current_user.token
-      @repos = GitInfo.repos(current_user)
-      @followers = GitInfo.followers(current_user)
-      @following = GitInfo.following(current_user)
+    @user = UserFacade.new(current_user)
     end
   end
 

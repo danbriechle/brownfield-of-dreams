@@ -12,11 +12,11 @@
   </section>
 
   <section>
-    <% if @repos %>
+    <% if @user %>
       <h1> GitHub Section </h1>
-      <li> Top <%= @repos.count  %> Repos</li>
+      <li> Top <%= @user.repos.count  %> Repos</li>
       <div class="top5repos">
-        <% @repos.each do |repo| %>
+        <% @user.repos.each do |repo| %>
         <div id=<%= repo.name %>>
           <a href=<%= repo.url %>><%= repo.name %></a>
         </div>
@@ -24,7 +24,7 @@
       </div>
       <li> Followers </li>
       <div class="followers">
-        <% @followers.each do |follower| %>
+        <% @user.followers.each do |follower| %>
         <div id=<%= follower.name %>>
           <a href=<%= follower.url %>><%= follower.name %></a>
         </div>
@@ -32,7 +32,7 @@
       </div>
       <li> Following </li>
       <div class="following">
-        <% @following.each do |follow| %>
+        <% @user.following.each do |follow| %>
         <div id=<%= follow.name %>>
           <a href=<%= follow.url %>><%= follow.name %></a>
         </div>
