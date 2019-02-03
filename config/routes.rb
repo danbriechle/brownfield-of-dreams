@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
+  get '/logout', to: "sessions#destroy"
 
   get '/dashboard', to: 'users#show'
   get '/about', to: 'about#show'
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
   get '/video', to: 'video#show'
 
   resources :users, only: [:new, :create, :update, :edit]
+  get '/auth/:github/callback', to: 'github_session#create'
+
 
   resources :tutorials, only: [:show, :index] do
     resources :videos, only: [:show, :index]

@@ -1,7 +1,13 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
 
-  <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
+  <div class="btn group">
+  <%= link_to 'Log Out', logout_path, method: :delete, class: "btn btn-primary mb1 bg-teal" %>
+  <% unless current_user.token %>
+    <%= link_to 'Connect to Github', "/auth/github", class: "btn btn-primary mb1 bg-teal" %>
+  <% end %>
+  </div>
+  
   <h3>Account Details</h3>
   <ul>
     <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
@@ -17,25 +23,25 @@
       <li> Top <%= @user.repos.count  %> Repos</li>
       <div class="top5repos">
         <% @user.repos.each do |repo| %>
-        <div id=<%= repo.name %>>
-          <a href=<%= repo.url %>><%= repo.name %></a>
-        </div>
+          <div id=<%= repo.name %>>
+            <a href=<%= repo.url %>><%= repo.name %></a>
+          </div>
         <% end %>
       </div>
       <li> Followers </li>
       <div class="followers">
         <% @user.followers.each do |follower| %>
-        <div id=<%= follower.name %>>
-          <a href=<%= follower.url %>><%= follower.name %></a>
-        </div>
+          <div id=<%= follower.name %>>
+            <a href=<%= follower.url %>><%= follower.name %></a>
+          </div>
         <% end %>
       </div>
       <li> Following </li>
       <div class="following">
         <% @user.following.each do |follow| %>
-        <div id=<%= follow.name %>>
-          <a href=<%= follow.url %>><%= follow.name %></a>
-        </div>
+          <div id=<%= follow.name %>>
+            <a href=<%= follow.url %>><%= follow.name %></a>
+          </div>
         <% end %>
       </div>
     <% end %>
