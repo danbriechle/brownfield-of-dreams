@@ -104,4 +104,20 @@ describe 'A registered user' do
       end
     end
   end
+  it 'can see connect to github button' do 
+    VCR.use_cassette "github sign-in" do 
+      dan = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(dan)
+
+      visit dashboard_path
+
+      expect(page).to have_content("Connect to Github")
+      
+      dan.update(token: ENV["DAN_GIT_API_KEY"])
+      
+      visit dashboard_path
+
+      expect(page).to_not have_content("Connect to Github")
+    end
+  end 
 end
