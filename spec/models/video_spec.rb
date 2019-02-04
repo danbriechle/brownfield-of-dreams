@@ -14,6 +14,7 @@ RSpec.describe Video, type: :model do
       Video.increment_position
 
       expect(Video.first.position).to eq(1)
+      expect(Video.last.position).to eq(2)
     end
   end
 end
