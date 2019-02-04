@@ -15,9 +15,9 @@
   </ul>
   <section class="bookmarks">
     <h1>Bookmarked Segments</h1>
-    <% @tutorials.each do |tutorial| %>
-      <%= tutorial.title %>
-        <% tutorial.videos.each do | video |%>
+    <% @bookmarks.bookmarks.each do |bookmark| %>
+      <%= bookmark.title %>
+        <% bookmark.videos.each do | video |%>
           <li>Title: <%= video.title %></li>
           <li>Position: <%= video.position %></li>
         <% end %>

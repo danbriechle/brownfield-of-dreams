@@ -1,9 +1,10 @@
 class BookmarkFacade
+  attr_reader :bookmarks
   def initialize(user)
     @user = user
   end
 
   def bookmarks
-    current_user.tutorials.includes(:videos)
+    @user.tutorials.includes(:videos)
   end
 end
