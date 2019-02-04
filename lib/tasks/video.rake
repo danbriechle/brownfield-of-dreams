@@ -1,6 +1,7 @@
+
 namespace :videos do
   desc 'increment'
-    task :increment do
+    task :increment => :environment do
        Video.increment_position
     end
 end
