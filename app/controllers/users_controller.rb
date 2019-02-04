@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     if current_user.token
     @user = UserFacade.new(current_user)
     end
+    @bookmarks = BookmarkFacade.new(current_user)
   end
 
   def new

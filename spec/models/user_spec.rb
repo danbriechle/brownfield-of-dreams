@@ -22,4 +22,20 @@ RSpec.describe User, type: :model do
       expect(admin.admin?).to be_truthy
     end
   end
+
+  describe 'instance methods' do
+    it '.tutorials' do
+      tutorial_1 = create(:tutorial, title: "tutorial 1")
+      video_1 = create(:video, title: "video 1", tutorial: tutorial_1)
+      tutorial_2 = create(:tutorial, title: "tutorial 2")
+      video_2 = create(:video, title: "video 2", tutorial: tutorial_2)
+
+      user = create(:user)
+      bookmark_1 = create(:user_video, user_id: user.id, video_id: video_1.id)
+      bookmark_2 = create(:user_video, user_id: user.id, video_id: video_2.id)
+
+      expect(user.tutorials.first.title).to eq("tutorial 1")
+      expect(user.tutorials.last.title).to eq("tutorial 2")
+    end
+  end
 end

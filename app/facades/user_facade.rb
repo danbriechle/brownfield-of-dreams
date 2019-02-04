@@ -1,4 +1,3 @@
-
 class UserFacade
   attr_reader :repos, :followers, :following
   def initialize(current_user)
