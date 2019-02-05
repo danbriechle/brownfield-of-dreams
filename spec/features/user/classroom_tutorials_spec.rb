@@ -21,4 +21,13 @@ describe "Dasboard page shows tutorials" do
         expect(page).to_not have_content(tut1.title) 
         expect(page).to have_content(tut2.title) 
     end
+    it 'shows a message when there is no video for the tutorial clicked' do 
+        user = create(:user)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+        tutorial = create(:tutorial, playlist_id: nil)
+        video = create(:video, tutorial: tutorial)
+        visit tutorial_path(tutorial)
+
+        expect(page).to have_content("There are currently no videos for this tutorial") 
+    end 
 end
