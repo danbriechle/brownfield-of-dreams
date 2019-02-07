@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
       Friendship.create(user_id: user.id, friend_id: user2.id)
 
       expect(user.is_friend?(user2)).to be_truthy
-      expect(user.is_friend?(user3)).to be_truthy
+      expect(user.is_friend?(user3)).to be false
     end
   end
 end
