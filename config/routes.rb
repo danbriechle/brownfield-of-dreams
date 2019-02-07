@@ -46,5 +46,5 @@ Rails.application.routes.draw do
 
   resources :user_videos, only:[:create, :destroy]
 
-  post 'friendships/friend_id', to: 'friendships#create', as: 'friendships'
+  post 'friendships/:friend_id', to: 'friendships#create', as: 'friendships'
 end
