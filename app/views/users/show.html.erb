@@ -1,6 +1,6 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
-
+  <h2><% flash[:notice] || flash[:error] %></h2>
   <div class="btn group">
   <%= link_to 'Log Out', logout_path, method: :delete, class: "btn btn-primary mb1 bg-teal" %>
   <% unless current_user.token %>
@@ -35,22 +35,28 @@
           </div>
         <% end %>
       </div>
-      <li> Followers </li>
-      <div class="followers">
-        <% @user.followers.each do |follower| %>
-          <div id=<%= follower.name %>>
-            <a href=<%= follower.url %>><%= follower.name %></a>
-          </div>
-        <% end %>
-      </div>
-      <li> Following </li>
-      <div class="following">
-        <% @user.following.each do |follow| %>
-          <div id=<%= follow.name %>>
-            <a href=<%= follow.url %>><%= follow.name %></a>
-          </div>
-        <% end %>
-      </div>
+        <li> Followers </li>
+        <div class="followers btn group">
+          <% @user.followers.each do |follower| %>
+            <div id="followers-<%= follower.uid %>">
+                <%= link_to follower.name, follower.url, class: "btn btn-primary mb1 bg-teal" %>
+              <% if follower.is_user? %>
+                <%= link_to "Add as Friend", friendships_path(friend_id: follower.uid), method: :post, class: "btn btn-primary mb1 bg-teal" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <li> Following </li>
+        <div class="following btn group">
+          <% @user.following.each do |follow| %>
+            <div id="following-<%= follow.uid %>">
+              <%= link_to follow.name, follow.url, class: "btn btn-primary mb1 bg-teal" %>
+              <% if follow.is_user? %>
+                <%= link_to "Add as Friend", friendships_path(friend_id: follow.uid), method: :post, class: "btn btn-primary mb1 bg-teal" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
     <% end %>
   </section>
 </section>

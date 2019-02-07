@@ -37,4 +37,19 @@ RSpec.describe "Following" do
     end
   end
 
+  describe "instance methods" do
+    it '.is_user?' do 
+      gh_resp1 = {"html_url" => "https://www.google.com", "login" => "lmao", "id" => 123}
+      gh_resp2 = {"html_url" => "https://www.google.com", "login" => "lol", "id" => 321}
+      follower = Following.new(gh_resp1)
+      follower2 = Following.new(gh_resp2)
+
+      user = create(:user, uid: 123)
+
+      expect(follower.is_user?).to be_truthy
+      expect(follower2.is_user?).to_not be_truthy
+    end
+  end
+
+
 end
