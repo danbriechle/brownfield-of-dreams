@@ -26,10 +26,14 @@ describe "As a user" do
             within("#following-#{anna}") do 
                 expect(page).to_not have_link("Add as Friend")
             end
+
+            within("#following-#{ian.uid}") do 
+                click_on "Add as Friend"
+            end
+
+            expect(page).to have_content("Friend Added!") 
+
         end
-    end
-    it "there is no link to add GH followers as friend if they're not connected to GH" do
-      
     end
   end
 end

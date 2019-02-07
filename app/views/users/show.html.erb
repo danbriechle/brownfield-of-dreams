@@ -1,6 +1,6 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
-
+  <h2><% flash[:notice] || flash[:error] %></h2>
   <div class="btn group">
   <%= link_to 'Log Out', logout_path, method: :delete, class: "btn btn-primary mb1 bg-teal" %>
   <% unless current_user.token %>
@@ -41,7 +41,7 @@
             <div id="followers-<%= follower.uid %>">
                 <%= link_to follower.name, follower.url, class: "btn btn-primary mb1 bg-teal" %>
               <% if follower.is_user? %>
-                <%= link_to "Add as Friend", root_path, class: "btn btn-primary mb1 bg-teal" %>
+                <%= link_to "Add as Friend", friendships_path(friend_id: follower.uid), method: :post, class: "btn btn-primary mb1 bg-teal" %>
               <% end %>
             </div>
           <% end %>
@@ -52,7 +52,7 @@
             <div id="following-<%= follow.uid %>">
               <%= link_to follow.name, follow.url, class: "btn btn-primary mb1 bg-teal" %>
               <% if follow.is_user? %>
-                <%= link_to "Add as Friend", root_path, class: "btn btn-primary mb1 bg-teal" %>
+                <%= link_to "Add as Friend", friendships_path(friend_id: follow.uid), method: :post, class: "btn btn-primary mb1 bg-teal" %>
               <% end %>
             </div>
           <% end %>
