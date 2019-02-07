@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/dashboard", to: "dashboard#show"
+    post 'friendships/:friend_id', to: 'friendships#create', as: 'friendships'
     resources :tutorials, only: [:create, :edit, :update, :destroy, :new] do
       resources :videos, only: [:create]
     end
