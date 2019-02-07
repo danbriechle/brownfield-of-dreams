@@ -9,5 +9,5 @@ class FriendshipsController < ApplicationController
             flash[:error] = "You suck."
             redirect_to dashboard_path
         end
-    end 
-end 
+    end
+end
