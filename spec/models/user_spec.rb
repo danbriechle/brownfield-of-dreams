@@ -37,5 +37,16 @@ RSpec.describe User, type: :model do
       expect(user.tutorials.first.title).to eq("tutorial 1")
       expect(user.tutorials.last.title).to eq("tutorial 2")
     end
+
+    it '.is_friend?' do
+      user = create(:user)
+      user2 = create(:user)
+      user3 = create(:user)
+
+      Friendship.create(user_id: user.id, friend_id: user2.id)
+
+      expect(user.is_friend?(user2)).to be_truthy
+      expect(user.is_friend?(user3)).to be_truthy
+    end
   end
 end
