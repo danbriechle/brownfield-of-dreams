@@ -41,7 +41,7 @@
             <div id="followers-<%= follower.uid %>">
                 <%= link_to follower.name, follower.url, class: "btn btn-primary mb1 bg-teal" %>
               <% if follower.is_user? %>
-                <%= link_to "Add as Friend", friendships_path(friend_id: follower.uid), method: :post, class: "btn btn-primary mb1 bg-teal" %>
+                <%= link_to "Add as Friend", friendships_path(friend_id: follower.uid), :method => :post, class: "btn btn-primary mb1 bg-teal" %>
               <% end %>
             </div>
           <% end %>
