@@ -40,7 +40,7 @@
           <% @user.followers.each do |follower| %>
             <div id="followers-<%= follower.uid %>">
                 <%= link_to follower.name, follower.url, class: "btn btn-primary mb1 bg-teal" %>
-              <% if follower.is_user? %>
+              <% if follower.is_user? && !@user.current_user.is_friend?(follower.uid)%>
                 <%= button_to "Add as Friend", friendships_path(friend_id: follower.uid), method: :post %>
               <% end %>
             </div>
@@ -51,7 +51,7 @@
           <% @user.following.each do |follow| %>
             <div id="following-<%= follow.uid %>">
               <%= link_to follow.name, follow.url, class: "btn btn-primary mb1 bg-teal" %>
-              <% if follow.is_user? %>
+              <% if follow.is_user? && !@user.current_user.is_friend?(follow.uid) %>
                 <%= button_to "Add as Friend", friendships_path(follow.uid), method: :post %>
               <% end %>
             </div>

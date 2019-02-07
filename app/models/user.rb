@@ -17,7 +17,7 @@ class User < ApplicationRecord
             .group(:id)
   end
 
-  def is_friend?(potential_friend)
-    Friendship.where(user_id: self.id, friend_id: potential_friend.id).exists?
+  def is_friend?(potential_friend_id)
+    Friendship.where(user_id: self.id, friend_id: potential_friend_id).exists?
   end
 end
