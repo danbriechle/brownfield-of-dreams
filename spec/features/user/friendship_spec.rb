@@ -16,15 +16,15 @@ describe "As a user" do
             visit dashboard_path
 
             within("#following-#{ian.uid}") do
-                expect(page).to have_link("Add as Friend")
+                expect(page).to have_button("Add as Friend")
             end
 
             within("#followers-#{mary.uid}") do
-                expect(page).to have_link("Add as Friend")
+                expect(page).to have_button("Add as Friend")
             end
 
             within("#following-#{anna}") do
-                expect(page).to_not have_link("Add as Friend")
+                expect(page).to_not have_button("Add as Friend")
             end
 
             within("#following-#{ian.uid}") do
@@ -32,7 +32,7 @@ describe "As a user" do
             end
 
             expect(page).to have_content("Friend Added!")
-            
+
 
         end
     end
