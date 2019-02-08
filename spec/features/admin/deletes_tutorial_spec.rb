@@ -23,8 +23,6 @@ feature "An admin visiting the admin dashboard" do
 
     expect(current_path).to eq(admin_dashboard_path)
 
-    binding.pry
-
     expect(page).to_not have_content(tutorial_1.title)
     expect(page).to have_content(tutorial_2.title)
 
