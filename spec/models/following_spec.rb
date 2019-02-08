@@ -37,8 +37,28 @@ RSpec.describe "Following" do
     end
   end
 
+  it 'can generate followees from api response' do
+    VCR.use_cassette("following") do
+      user = create(:user, token: ENV["DAN_GIT_API_KEY"])
+      conn = Faraday.new(url: "https://api.github.com") do |f|
+        f.headers["Authorization"] = "Token #{user.token}"
+        f.adapter Faraday.default_adapter
+      end
+
+      response = conn.get "/user/following"
+
+      actual = JSON.parse(response.body).first["id"]
+
+      follower = Following.generate(response)
+
+      expected = follower.first.uid
+
+      expect(expected).to eq(actual)
+    end
+  end
+
   describe "instance methods" do
-    it '.is_user?' do 
+    it '.is_user?' do
       gh_resp1 = {"html_url" => "https://www.google.com", "login" => "lmao", "id" => 123}
       gh_resp2 = {"html_url" => "https://www.google.com", "login" => "lol", "id" => 321}
       follower = Following.new(gh_resp1)
