@@ -33,7 +33,6 @@ describe "As a user" do
 
             expect(page).to have_content("Friend Added!")
 
-
         end
     end
   end
