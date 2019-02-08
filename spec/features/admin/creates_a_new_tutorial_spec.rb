@@ -13,7 +13,6 @@ feature "An admin visiting the admin dashboard" do
 
     # When I visit '/admin/tutorials/new'
     visit "admin/tutorials/new"
-    save_and_open_page
     # And I fill in 'title' with a meaningful name
     fill_in "Title", with: title
     # And I fill in 'description' with a some content
@@ -24,9 +23,9 @@ feature "An admin visiting the admin dashboard" do
     # And I click on 'Save'
     click_on 'Save'
 
-    # new_totrial_id = Tutorial.last.id
+    new_tutorial_id = Tutorial.last.id
     # Then I should be on '/tutorials/{NEW_TUTORIAL_ID}'
-    # expect(current_path).to eq("/tutorials/#{new_totrial_id}")
+    expect(current_path).to eq("/tutorials/#{new_tutorial_id}")
     # And I should see a flash message that says "Successfully created tutorial."
     expect(page).to have_content("Successfully created tutorial.")
     # expect(page).to have_css(".admin-tutorial-card", count: 2)
