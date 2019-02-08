@@ -32,7 +32,20 @@ Capybara.configure do |config|
   config.default_max_wait_time = 5
 end
 
-SimpleCov.start "rails"
+
+SimpleCov.start "rails" do
+add_filter "/app/channels/application_cable/channel.rb"
+add_filter "/app/channels/application_cable/connection.rb"
+add_filter "/app/controllers/about_controller.rb"
+add_filter "/app/controllers/admin/api/v1/base_controller.rb"
+add_filter "/app/controllers/admin/api/v1/tutorial_sequencer_controller.rb"
+add_filter "/app/controllers/concerns/github_session_controller.rb"
+add_filter "/app/controllers/get_started_controller.rb"
+add_filter "/app/helpers/application_helper.rb"
+add_filter "/app/jobs/application_job.rb"
+add_filter "/app/mailers/application_mailer.rb"
+#ignore files that have no reason to exist or were written and untested because brownfield
+end
 
 Shoulda::Matchers.configure do |config|
     config.integrate do |with|

@@ -5,9 +5,6 @@ class FriendshipsController < ApplicationController
         if @friendship.save
             flash[:notice] = "Friend Added!"
             redirect_to dashboard_path
-        else
-            flash[:error] = "You suck."
-            redirect_to dashboard_path
         end
     end
 end
