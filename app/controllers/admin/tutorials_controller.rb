@@ -4,11 +4,12 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def create
-    tutorial = Tutorial.create(make_tutorial_params)
-    if tutorial.save
+    @tutorial = Tutorial.create(make_tutorial_params)
+    if @tutorial.save
       flash[:notice] = "Successfully created tutorial."
-      redirect_to tutorial_path(tutorial.id)
+      redirect_to tutorial_path(@tutorial.id)
     else
+      @errors = @tutorial.errors
       flash[:notice] = "Incorrect Info"
       render :new
     end
