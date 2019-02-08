@@ -11,6 +11,8 @@
   <h4><%= flash[:notice] %></h4>
   <% if current_user.active %>
     <h4>Status: Active</h4>
+  <% else %>
+    <h4>Status: Inactive</h4>
   <% end %>
   <h3>Account Details</h3>
   <ul>

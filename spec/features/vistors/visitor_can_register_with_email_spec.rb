@@ -25,5 +25,7 @@ describe "user can register with email" do
     visit dashboard_path
 
     expect(page).to have_content "Status: Active" 
-  end 
+  end
+
+  
 end
