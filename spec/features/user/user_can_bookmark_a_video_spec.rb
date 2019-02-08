@@ -32,3 +32,16 @@ describe 'A registered user' do
     expect(page).to have_content("Already in your bookmarks")
   end
 end
+
+describe 'an unregistered user' do
+  it 'must log in to bookmark a tutorial' do
+    tutorial= create(:tutorial)
+    video = create(:video, tutorial_id: tutorial.id)
+
+    visit tutorial_path(tutorial)
+    
+    click_on 'Bookmark'
+
+    expect(page).to have_content("You must log in")
+  end
+end
