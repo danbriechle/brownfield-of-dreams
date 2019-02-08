@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     if current_user.token 
       @user = UserFacade.new(current_user)
-    elsif current_user.active == (nil || false)
+    elsif current_user.active == nil || current_user.active == false
       flash[:notice] = "This account has not yet been activated. Please check your email."
     end
       @bookmarks = BookmarkFacade.new(current_user)
