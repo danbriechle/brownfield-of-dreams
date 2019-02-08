@@ -1,5 +1,6 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
+
   <h2><% flash[:notice] || flash[:error] %></h2>
   <div class="btn group">
   <%= link_to 'Log Out', logout_path, method: :delete, class: "btn btn-primary mb1 bg-teal" %>
@@ -7,7 +8,12 @@
     <%= link_to 'Connect to Github', "/auth/github", class: "btn btn-primary mb1 bg-teal" %>
   <% end %>
   </div>
-
+  <h4><%= flash[:notice] %></h4>
+  <% if current_user.active %>
+    <h4>Status: Active</h4>
+  <% else %>
+    <h4>Status: Inactive</h4>
+  <% end %>
   <h3>Account Details</h3>
   <ul>
     <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>

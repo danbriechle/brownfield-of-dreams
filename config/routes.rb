@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :update, :edit]
   get '/auth/:github/callback', to: 'github_session#create'
-
+  get '/users/verify', to: "users#verify", as: "verify"
 
   resources :tutorials, only: [:show, :index] do
     resources :videos, only: [:show, :index]
