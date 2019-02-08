@@ -1,4 +1,9 @@
 <h2>New Tutorial</h2>
+  <% if @errors %>
+      <% @errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+      <% end %>
 <%= form_for [:admin, @tutorial] do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title, class: "block col-4 field" %>
@@ -6,8 +11,6 @@
   <%= f.text_area :description, class: "block col-4 field"  %>
   <%= f.label :thumbnail %>
   <%= f.text_field :thumbnail, class: "block col-4 field"  %>
-
-  <h3>Videos</h3>
 
   <%= f.fields_for :videos do |builder| %>
     <%= f.label :youtube_url %>
