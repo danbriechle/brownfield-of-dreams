@@ -17,14 +17,16 @@ feature "An admin visiting the admin dashboard" do
 
     visit "/admin/dashboard"
 
-    within ".tutorials-#{tutorial_1.id}" do
-      click_on "destroy"
+    within ".tutorial-#{tutorial_1.id}" do
+      click_on "Destroy"
     end
 
-    expect(current_path).to eq(dashboard_path)
+    expect(current_path).to eq(admin_dashboard_path)
 
-    expect(page).to_not have_content(tutorial_1.name)
-    expect(page).to have_content(tutorial_1.name)
+    binding.pry
+
+    expect(page).to_not have_content(tutorial_1.title)
+    expect(page).to have_content(tutorial_2.title)
 
   end
 end
